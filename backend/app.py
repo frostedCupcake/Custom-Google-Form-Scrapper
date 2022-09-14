@@ -1,10 +1,17 @@
-from flask import Flask, request
+#import flask.ext
+from flask import Flask, request, jsonify, make_response
+#from flask.ext.cors import CORS
+from flask_cors import CORS, cross_origin
 import json
 from os import path
 
 from senti import get_senti
 
 app = Flask(__name__)
+#CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
+app.config['CORS_HEADERS'] = 'Content-Type'
+#app.config['CORS_HEADERS'] = 'application/json'
 
 def initCourse(courseId, courseName):
     with open(f"courses/{courseId}.json", "w") as f:
@@ -13,6 +20,14 @@ def initCourse(courseId, courseName):
             "instructors": dict()
         }
         json.dump(base, f)
+
+@app.route("/", methods=["OPTIONS"])
+def root():
+    response = make_response()
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add('Access-Control-Allow-Headers', "*")
+    response.headers.add('Access-Control-Allow-Methods', "*")
+    return response
 
 """
 Request JSON format:
@@ -29,8 +44,14 @@ Request JSON format:
     "courseRemarks": ""
 }
 """
-@app.route("/api/feedback/<courseId>", methods=["POST"])
+@app.route("/api/feedback/<courseId>", methods=["POST", "OPTIONS"])
 def course(courseId):
+    if request.method == "OPTIONS":
+        response = make_response()
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add('Access-Control-Allow-Headers', "*")
+        response.headers.add('Access-Control-Allow-Methods', "*")
+        return response
     reqJson = request.get_json()
     if not path.exists(f"courses/{courseId}.json"):
         initCourse(courseId, reqJson["name"])
@@ -69,7 +90,11 @@ def course(courseId):
     with open(f"courses/{courseId}.json", "w") as f:
         json.dump(fileJson, f, indent=2)
 
-    return "OK"
+    res = jsonify("OK")
+    res.headers.add("Access-Control-Allow-Origin", "*")
+    res.headers.add("Access-Control-Allow-Headers", "*")
+    res.headers.add("Access-Control-Allow-Methods", "*")
+    return res
 
 @app.route("/api/info/<courseId>", methods=["GET"])
 def info(courseId):
