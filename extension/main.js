@@ -5,14 +5,16 @@
 // })
 // Select the node that will be observed for mutations
 const targetNode = document.getElementsByClassName('MuiBox-root css-7p9w9v')[1];
-
+let prof_name,course_name;
 // Options for the observer (which mutations to observe)
 const config = { attributes: true, childList: true, subtree: true };
 
 // Callback function to execute when mutations are observed
 const callback = (mutationList, observer) => {
-  const y = document.getElementsByClassName('MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput')
-  console.log(y[0].value)
+  const y = document.getElementsByClassName('MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput');
+  course_name = y[0].value.split('-')[0]
+  prof_name = y[0].value.split('-')[1]
+  console.log(course_name)
 };
 
 // Create an observer instance linked to the callback function
@@ -36,44 +38,44 @@ const btns3 = radio[3].childNodes
 const btns4 = radio[4].childNodes
 const btns5 = radio[5].childNodes
 
-btns0.forEach(element => {
+btns0.forEach((element, i) => {
     element.addEventListener('click', () => {
-        data[0] = element.textContent
+        data[0] = i
         handleClick();
     })
 })
 
-btns1.forEach(element => {
+btns1.forEach((element,i) => {
     element.addEventListener('click', () => {
-        data[1] = element.textContent
+        data[1] = i
         handleClick();
     })
 })
 
-btns2.forEach(element => {
+btns2.forEach((element,i) => {
     element.addEventListener('click', () => {
-        data[2] = element.textContent
+        data[2] = i
         handleClick();
     })
 })
 
-btns3.forEach(element => {
+btns3.forEach((element,i) => {
     element.addEventListener('click', () => {
-        data[3] = element.textContent
+        data[3] = i
         handleClick();
     })
 })
 
-btns4.forEach(element => {
+btns4.forEach((element,i) => {
     element.addEventListener('click', () => {
-        data[4] = element.textContent
+        data[4] = i
         handleClick();
     })
 })
 
-btns5.forEach(element => {
+btns5.forEach((element,i) => {
     element.addEventListener('click', () => {
-        data[5] = element.textContent
+        data[5] = i
         handleClick();
     })
 })
@@ -105,6 +107,38 @@ textArea2.addEventListener('input',()=>{
 })
 
 //
+
+const userFeedback = {
+    "name":course_name,
+    "instructors":{
+        prof_name:{
+            "MCQs":data,
+            "profRemarks":text2
+        }
+    },
+    "courseRemarks":text
+}
+
+const userAction = async () => {
+    const response = await fetch('http://192.168.0.111:5001', {
+      method: 'POST',
+      body: userFeedback, // string or object
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const myJson = await response.json()
+    .then(console.log(myJson)) //extract JSON from the http response
+    // do something with myJson
+  }
+
+const btn = document.getElementsByClassName('MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-10ovtti-MuiButtonBase-root-MuiButton-root');
+
+btn[0].addEventListener('click',()=>{
+    userAction();
+})
+
+
 
 
 
