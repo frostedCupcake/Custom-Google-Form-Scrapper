@@ -1,5 +1,6 @@
 from flask import Flask, request
 import json
+from os import path
 
 from senti import get_senti
 
@@ -39,6 +40,7 @@ def course(courseId):
         fileJson = json.load(f)
 
     print(fileJson)
+    courseSenti = get_senti([reqJson["courseRemarks"]])
     for instructor in reqJson["instructors"]:
         reqInst = reqJson["instructors"][instructor]
         if instructor not in fileJson["instructors"]:
@@ -46,13 +48,20 @@ def course(courseId):
                 "MCQs": [ { "answers": [0, 0, 0, 0, 0] } for i in range(len(reqInst["MCQs"])) ],
                 "profRemarks": [],
                 "courseRemarks": [],
-                "AIRemarks": []
+                "AIRemarks": [0, 0, 0]
             }
         fileInst = fileJson["instructors"][instructor]
         print(fileInst)
 
         for opt, opt_obj in zip(reqInst["MCQs"], fileInst["MCQs"]):
             opt_obj["answers"][opt] += 1
+
+        profSenti = get_senti([reqInst["profRemarks"]])
+        fileInst["AIRemarks"][0] += courseSenti[0] + profSenti[0]
+        fileInst["AIRemarks"][1] += courseSenti[1] + profSenti[1]
+        fileInst["AIRemarks"][2] += courseSenti[2] + profSenti[2]
+        # AIRemarks is a sentiment array [negative, neutral, positive]
+        # totals don't matter, just their ratio
 
         fileInst["profRemarks"].append(reqInst["profRemarks"])
         fileInst["courseRemarks"].append(reqJson["courseRemarks"])

@@ -9,7 +9,7 @@
             0,
             0,
             0,
-            5
+            1
           ]
         },
         {
@@ -18,7 +18,7 @@
             0,
             0,
             0,
-            5
+            1
           ]
         },
         {
@@ -27,7 +27,7 @@
             0,
             0,
             0,
-            5
+            1
           ]
         },
         {
@@ -36,7 +36,7 @@
             0,
             0,
             0,
-            5
+            1
           ]
         },
         {
@@ -45,7 +45,7 @@
             0,
             0,
             0,
-            5
+            1
           ]
         },
         {
@@ -54,25 +54,21 @@
             0,
             0,
             0,
-            5
+            1
           ]
         }
       ],
       "profRemarks": [
-        "unique",
-        "unique",
-        "unique",
-        "unique",
         "unique"
       ],
       "courseRemarks": [
-        "it was a spiritual experience",
-        "it was a spiritual experience",
-        "it was a spiritual experience",
-        "it was a spiritual experience",
         "it was a spiritual experience"
       ],
-      "AIRemarks": []
+      "AIRemarks": [
+        0.2615975495427847,
+        0.7622168362140656,
+        0.9761856198310852
+      ]
     }
   }
 }
