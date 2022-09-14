@@ -108,27 +108,29 @@ textArea2.addEventListener('input',()=>{
 
 //
 
-const userFeedback = {
-    "name":course_name,
-    "instructors":{
-        prof_name:{
-            "MCQs":data,
-            "profRemarks":text2
-        }
-    },
-    "courseRemarks":text
-}
 
 const userAction = async () => {
-    const response = await fetch('http://192.168.0.111:5001', {
+    
+    const userFeedback = {
+        "name":course_name,
+        "instructors":{
+            prof_name:{
+                "MCQs":data,
+                "profRemarks":text2
+            }
+        },
+        "courseRemarks":text
+    }
+    console.log(userFeedback)
+    const response = await fetch(`http://192.168.0.111:5001/api/feedback/${course_name}`, {
       method: 'POST',
-      body: userFeedback, // string or object
+      body: JSON.stringify(userFeedback), // string or object
       headers: {
         'Content-Type': 'application/json'
       }
     });
     const myJson = await response.json()
-    .then(console.log(myJson)) //extract JSON from the http response
+    console.log(myJson) //extract JSON from the http response
     // do something with myJson
   }
 
