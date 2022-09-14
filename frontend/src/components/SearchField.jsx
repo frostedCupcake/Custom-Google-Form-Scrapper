@@ -14,7 +14,7 @@ const SearchField = (props) => {
   const [search, setSearch] = React.useState("");
   const submitHandler = (e) => {
     e.preventDefault();
-    const url = "http://192.168.0.111:5001/api/info/" + search;
+    const url = "http://localhost:5001/api/info/" + search;
     console.log(url);
     Axios.get(url)
       .then((response) => {
