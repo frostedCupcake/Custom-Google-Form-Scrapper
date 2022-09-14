@@ -15,7 +15,7 @@ First time:
 ```
 cd backend
 virtualenv env
-./env/bin/activate
+. env/bin/activate
 pip install -r requirements.txt
 ```
 
