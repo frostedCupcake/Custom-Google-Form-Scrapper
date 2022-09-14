@@ -62,6 +62,7 @@ const Dropdown = () => {
                   sx={{
                     fontSize: "1.2rem",
                   }}
+                  value={el}
                 >
                   {el}
                 </MenuItem>
