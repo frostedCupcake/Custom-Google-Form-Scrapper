@@ -1,0 +1,13 @@
+{
+    "name":"milan",
+    "description":"new extension",
+    "version":"0.0.1",
+    "manifest_version": 3,
+    "content_scripts":[
+        {
+            "js":["main.js"],
+            "matches":["<all_urls>"]
+        }
+    
+    ]
+}

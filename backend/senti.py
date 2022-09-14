@@ -14,7 +14,7 @@ model.save_pretrained(MODEL)
 tokenizer.save_pretrained(MODEL)
 
 
-text = ["go to hell","good morning",'how are you?']
+# given array of strings, returns avg values [neg_senti, neut_senti, pos_senti]
 def get_senti(text):
     final_scores = np.array([0,0,0])
     for t in text:
@@ -26,4 +26,5 @@ def get_senti(text):
     print(final_scores/len(text))
     return final_scores #NEG NU POS
 
+text = ["go to hell","good morning",'how are you?']
 get_senti(text)
