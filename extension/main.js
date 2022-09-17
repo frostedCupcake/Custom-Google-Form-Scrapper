@@ -122,7 +122,7 @@ const userAction = async () => {
         "courseRemarks":text
     }
     console.log(userFeedback)
-    const response = await fetch(`http://192.168.0.111:5001/api/feedback/${course_name}`, {
+    const response = await fetch(`http://localhost:5001/api/feedback/${course_name}`, {
       method: 'POST',
       body: JSON.stringify(userFeedback), // string or object
       headers: {
