@@ -1,10 +1,10 @@
-# RR_Milan_Hackathon
+# Custom Google Form Scrapper
 
-Presenting AIMS feedback in a user friendly way, and extracting sentiment towards a professor using semantic analysis on the remarks provided in the form.
+We are presenting AIMS ( IITH student academic portal ) feedback in a user-friendly way, and extracting sentiment towards a professor using semantic analysis on the remarks provided in the form.
 
-This project takes input from the AIMS feedback page using a browser extension, and sends the data to a custom backend. However, since the AIMS portal is currently unavailable (no feedback to provide), we built a simple sample feedback form (available in `./sample-form`) for a proof of concept. We built an extension that parses the data from this form, and when submitting, sends it to the backend, which runs the sentiment analysis on it.
+This project takes input from the AIMS feedback page using a browser extension and sends the data to a custom backend. However, since the AIMS portal is currently unavailable (no feedback to provide), we built a simple sample feedback form (available in `./sample-form`) for a proof of concept. We built an extension that parses the data from this form, and when submitting, sends it to the backend, which runs the sentiment analysis on it.
 
-Finally, the frontend shows the average sentiment towards the professor for the course, and also the responses to the multiple choice questions.
+Finally, the front end shows the average sentiment towards the professor for the course, and also the responses to the multiple-choice questions.
 
 ### Configuration 
 
